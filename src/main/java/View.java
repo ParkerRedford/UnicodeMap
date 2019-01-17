@@ -174,8 +174,6 @@ public class View {
                     final ClipboardContent content = new ClipboardContent();
                     content.putString(button.getText());
                     board.setContent(content);
-
-                    button.setStyle("-fx-background-color: red");
                 });
                 flow.getChildren().add(button);
             }
