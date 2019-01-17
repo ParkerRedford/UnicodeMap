@@ -12,6 +12,8 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class View {
     private ComboBox<String> comboFonts = new ComboBox<>();
     private ObservableList<String> list = FXCollections.observableArrayList();
     private ComboBox<String> comboPresets = new ComboBox<>();
+    private Text copiedUnicode = new Text();
 
     /**
      * Constructor
@@ -99,13 +102,19 @@ public class View {
          * Base
          */
         VBox base = new VBox();
-
+        /**
+         * Set copiedUnicode aligned to right of window
+         */
+        HBox top = new HBox();
+        Region region = new Region();
+        HBox.setHgrow(region, Priority.ALWAYS);
 
         /**
          * Predefined unicode list for selection
          */
         // Sort list
         java.util.Collections.sort(list, Collator.getInstance());
+
         // Use Observable List for the combo box
         comboPresets.setItems(list);
 
@@ -174,12 +183,15 @@ public class View {
                     final ClipboardContent content = new ClipboardContent();
                     content.putString(button.getText());
                     board.setContent(content);
+
+                    copiedUnicode.setFont(Font.font(fontString.toString(), 48));
+                    copiedUnicode.setText(button.getText());
                 });
                 flow.getChildren().add(button);
             }
         });
         /**
-         * Set text fields from unicode combo box
+         * Set text fields from selected unicode combo box
          */
         comboPresets.setOnAction(e -> {
             int index = comboPresets.getSelectionModel().getSelectedIndex();
@@ -190,7 +202,8 @@ public class View {
 
         grid.add(submit, 1, 3);
 
-        base.getChildren().setAll(grid, scroll);
+        top.getChildren().setAll(grid, region, copiedUnicode);
+        base.getChildren().setAll(top, scroll);
 
         scene = new Scene(base, 1080, 720);
 
