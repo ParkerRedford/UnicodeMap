@@ -2,3 +2,6 @@ Note: Only Blocks.txt and UnicodeData.txt were used from the 'Resources' folder.
 
 Known issues:
     Some unicode characters do not output their names properly
+
+Planned Features:
+    Tabs for Blocks and names and be able to search
