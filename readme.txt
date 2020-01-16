@@ -4,4 +4,4 @@ Known issues:
     Some unicode characters do not output their names properly
 
 Planned Features:
-    Tabs for Blocks and names and be able to search
+    Tabs for Blocks and Names and be able to search for both lists
